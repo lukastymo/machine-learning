@@ -11959,9 +11959,9 @@ Standard deviation of prices: $165340.27765266784
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <ul>
-<li>Increase in <strong>RM</strong> would lead to increase in MEDV. More rooms mean bigger home, which should be more expensive.</li>
-<li>Increase in <strong>LSTAT</strong> would lead to decrase in MEDV. Lower class usually cannnot afford to leave in more expensive houses, so the price should go down.</li>
-<li>Increase in <strong>PTRATIO</strong> would lead to decraese in MEDV. More studends is related with overcrowded schools, less money spent on education in the area, which probably indicate poorer neighborhood, so lower house prices too.</li>
+<li>Increase in <strong>RM</strong> would lead to increase in MEDV. Similarly, decrease in <strong>RM</strong> would lead to decrease in MEDV. More rooms (RM) mean bigger home. Bigger houses tend to be more expensive.</li>
+<li>Increase in <strong>LSTAT</strong> would lead to decrase in MEDV. In contract, decrease in <strong>LSTAT</strong> would lead to increase in MEDV. Lower class (bigger LSTAT) usually cannnot afford to leave in more expensive houses, so the price should go down once LSTAT is higher.</li>
+<li>Increase in <strong>PTRATIO</strong> would lead to decraese in MEDV. Decrease in <strong>PTRATIO</strong> would lead to increase in MEDV. More studends (higher PTRATIO) is related with overcrowded schools, less money spent on education in the area, which probably indicate poorer neighborhood, so lower house prices too.</li>
 </ul>
 
 </div>
@@ -12374,8 +12374,8 @@ Think about the pros and cons of adding more training points based on if the tra
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <ul>
-<li>Max_depth=3 and 4 the best generalize to unseen data</li>
-<li>I've chosen this values because for them for Max_depth=3 and 4 the score has the highest values</li>
+<li>Max_depth=4 the best generalize to unseen data</li>
+<li>I've chosen this value because the validation score is the highest in this point.</li>
 </ul>
 
 </div>
@@ -12410,7 +12410,8 @@ Think about the pros and cons of adding more training points based on if the tra
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <ul>
-<li>Grid Search technique is a method to find the best parameters for our model, which maximize the F-score. In this method we choose a set of hyper parameters, and then we test the model for each of them to see which set is better. The grid contains all possibilities like for example when we're training a support vector machine where we use C and Kernel hyper parameters.</li>
+<li>Grid Search technique is a method to find the best parameters for our model. It maximizes the F-score. In this method we choose a set of hyper parameters, and then we test the model for each of them to see which set is better.</li>
+<li>The grid contains all possibilities like for example when we're training a support vector machine where we use C and Kernel hyper parameters, and then concider multiple combination in order to find the best in terms of F-score set.</li>
 </ul>
 
 </div>
@@ -12476,7 +12477,7 @@ For the <code>fit_model</code> function in the code cell below, you will need to
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO: Import &#39;make_scorer&#39;, &#39;DecisionTreeRegressor&#39;, and &#39;GridSearchCV&#39;</span>
@@ -12542,7 +12543,7 @@ For the <code>fit_model</code> function in the code cell below, you will need to
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Fit the training data to the model using grid search</span>
@@ -12580,7 +12581,7 @@ For the <code>fit_model</code> function in the code cell below, you will need to
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong> Hint: </strong> The answer comes from the output of the code snipped above.</p>
-<p><strong>Answer:</strong> Max_depth=4 for the optimal model. I've chosen both: 3 and 4 as they seem to be the same on the graph, but looks like 4 is slightly higher.</p>
+<p><strong>Answer:</strong> Max_depth=4 for the optimal model. I've chosen the same value in Question 6.</p>
 
 </div>
 </div>
@@ -12631,7 +12632,7 @@ For the <code>fit_model</code> function in the code cell below, you will need to
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Produce a matrix for client data</span>
@@ -12695,7 +12696,7 @@ Predicted selling price for Client 3&#39;s home: $931,636.36
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">vs</span><span class="o">.</span><span class="n">PredictTrials</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">prices</span><span class="p">,</span> <span class="n">fit_model</span><span class="p">,</span> <span class="n">client_data</span><span class="p">)</span>
