@@ -73,12 +73,29 @@ The data quality is good enough. There are no missing values for raw data (for a
 
 ### Algorithms and Techniques
 
-TODO: Describe LSTM here:
+Deep learning algorithms typically required normalized data, it's not different with LSTM. The very first step before we train model is to make all the prices and volumes between 0-1. 
 
-- CNN, 
-- LSTM, 
-- parameters
+Recurrent Neural Network introduces a possibility to learn from input and feedback from the past experiences. This is extremely powerful toolkit as it gives to neural network kind of memory. The concept of past experiences mean that this Neural Network is perfect to model time series data like stock for example prices.
 
+**Fig. 3** The Recurrent Neural Network (picture from (4))
+
+<img src="/8C7FCCF8-813C-4FE8-959E-F77E01CA00C4.png" width=700; height=400>
+
+Long Short Term Memory networks are extended version of RNN, they are capable of learning long term dependencies. 
+
+LSTM cell has 5 components:
+
+- Cell state - it is an internal memory. It stores the long term and short term states.
+- Hidden state - It is an output state which is used for returning the final output (predicting time-series prices)
+- Input gate - chooses how much information is passed to cell state
+- Forget gate - chooses how much information from previous cell and current input is passed to the current sell state
+- Output gate - Chooses how much information is passed to the hidden state
+
+Parameters:
+
+- window-length - how many days the algorithm will have access to
+- D - dimensionality of the output. As we predict price for the next day, it will be 1
+- 
 ### Benchmark
 
 |Algorithm|Setup|RMSE|
@@ -117,4 +134,5 @@ TODO: Describe LSTM here:
 1. https://www.quora.com/What-is-bitcoin-Why-is-it-so-popular
 2. https://hackernoon.com/sentiment-analysis-in-cryptocurrency-9abb40005d15
 3. https://www.kaggle.com/mczielinski/bitcoin-historical-data
+4. http://colah.github.io/posts/2015-08-Understanding-LSTMs/
 
