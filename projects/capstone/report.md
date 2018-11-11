@@ -132,6 +132,16 @@ The following algorithms were tested and compared with LSTM model.
 
 ### Data Preprocessing
 
+At the beginning the data is reduced to only column which are useful for the training the model (Columns: Close and Volume).
+
+Second step is to normalize the input data to have values between 0 and 1.0 (Normalization).
+
+Third step is to split the data into Train and Test. The train set is then split into Train and validation sets in the `fit` method.
+
+The train set contains prices between: 
+
+
+
 ### Implementation
 
 ### Refinement
