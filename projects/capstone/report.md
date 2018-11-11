@@ -91,21 +91,42 @@ LSTM cell has 5 components:
 - Forget gate - chooses how much information from previous cell and current input is passed to the current sell state
 - Output gate - Chooses how much information is passed to the hidden state
 
-Parameters:
+The following parameters can be tuned to optimize the algorithm:
+
+Training:
 
 - window-length - how many days the algorithm will have access to
-- D - dimensionality of the output. As we predict price for the next day, it will be 1
-- 
+- units - dimensionality of the output. 
+- batch-size - the batch size used for the training sample. Each batch trains network in a successive order, taking into account the updated weights coming from the appliance of the previous batch
+
+Neural network architecture:
+
+- Number of layers
+- LSTM activation function, default: tanh
+- Dropout size
+- Optimizer and loss function
+- Validation set size
+- Number of iterations (epochs)
+
+
 ### Benchmark
+
+To create a benchmark I used two types of tests
+
+The first test answered the question: Does past prices contain a value which can be used to predict future. It's a fundamental questions if we are really able to predict future prices knowing only the history. In this tests I used the trained LSTM model for predicting randomly generated prices. It is expected to have very poor results here, as the `price_t+1` does not related on `price_t`
+
+The second group of tests is comparison of the LSTM to another models. Some of them like Linear Regression are only theoretical, as they are not designed for predicting time-series data. The goal for this benchmarks is to choose the best model in real life. The model which has the smallest error is probably the best choice of using this on real life data. 
+
+The following algorithms were tested and compared with LSTM model.
 
 |Algorithm|Setup|RMSE|
 |--------|----------|---|
-| LSTM | one layer | RMSE = 671.22
-| Random Walk | +/- 20% per day | RMSE = 3184.26
-| Linear Regression | Continous split | RMSE = 9185.11
-| Linear Regression | Random split | RMSE = 703.52
-| Moving averages | Long window = 100 days | RMSE = 3758.70
-| Moving averages | Short window = 20 days | RMSE = 1665.71
+| **LSTM** | **one layer** | **RMSE = $633.30**
+| Random Walk | +/- 20% per day | RMSE = $3184.26
+| Linear Regression | Continous split | RMSE = $9185.11
+| Linear Regression | Random split | RMSE = $703.52
+| Moving averages | Long window = 100 days | RMSE = $3758.70
+| Moving averages | Short window = 20 days | RMSE = $1665.71
 
 ## Methodology
 
