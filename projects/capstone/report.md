@@ -77,6 +77,15 @@ The data quality is good enough. There are no missing values for raw data (for a
 
 ### Benchmark
 
+|Algorithm|Setup|RMSE|
+|--------|----------|---|
+| LSTM | one layer | RMSE = 671.22
+| Random Walk | +/- 20% per day | RMSE = 3184.26
+| Linear Regression | Continous split | RMSE = 9185.11
+| Linear Regression | Random split | RMSE = 703.52
+| Moving averages | Long window = 100 days | RMSE = 3758.70
+| Moving averages | Short window = 20 days | RMSE = 1665.71
+
 ## Methodology
 
 ### Data Preprocessing
