@@ -73,7 +73,11 @@ The data quality is good enough. There are no missing values for raw data (for a
 
 ### Algorithms and Techniques
 
+TODO: Describe LSTM here:
 
+- CNN, 
+- LSTM, 
+- parameters
 
 ### Benchmark
 
