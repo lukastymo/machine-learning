@@ -132,33 +132,103 @@ The following algorithms were tested and compared with LSTM model.
 
 ### Data Preprocessing
 
+The input data has good quality, as they do not contain any incorrect values. Besides few days missing - which can be ignored as it is statistically insignificant, rest of the data are good and can be used in the algorithm.
+
 At the beginning the data is reduced to only column which are useful for the training the model (Columns: Close and Volume).
 
 Second step is to normalize the input data to have values between 0 and 1.0 (Normalization).
 
 Third step is to split the data into Train and Test. The train set is then split into Train and validation sets in the `fit` method.
 
-The train set contains prices between: 
-
-
+The train set contains prices between: 01/12/2014 - 15/10/2017. The test set contains prices between: 16/10/2017 - 27/06/2018 (80% train, 20% test split).
 
 ### Implementation
 
+The implementation has four parts:
+
+1. The model training stage
+2. The model testing stage
+3. Additional benchmark model creation
+4. Validating the results against the additional model
+
+The model testing stage uses previously splitted the historical values and calculate the RMSE in order to determine how efficient is the prediction. There is also a visual representation of actual and predicted price. 
+
+The additional benchmarks are calculated: Random prices to compare that the LSTM model won't predict effectively these random data. 
+
+There are also Random walk model, Linear regression and Moving average models computed. All of them present higher mistakes (in terms of RMSE) in comparison with LSTM model.
+
 ### Refinement
+
+The one-layer LSTM model presents very good result in terms of RMSE: Only $633 error in predicting 255 days is a very promising result. The random walk benchmark and moving averages show that this result is very good, as using any other approaches will not give the better profit.
+
+The Linear Regression with random split generates very good results too, recorded at $703. It has close RMSE to the LSTM model, but when we see the visual representation it will be clear that the Linear Regression is not pragmatic, as it minimize the error but cannot be used to determine if Bitcoin should be bought or sold - the simple line does not help in trading strategy.
+
+<p><img src="/BE82F05F-A6BA-4F12-9B8C-69DC7F7C3D03.png" width=700; height=400></p>
 
 ## Results
 
 ### Model Evaluation and Validation
 
+The combination of layers and hyperparameters were chosen by trial and error. They generated the lowest error (RMSE)
+
+The model training stage uses Sequential neural network model with the following architecture:
+
+Layer (type)| Output Shape |Param # |
+---|---|----|
+lstm_89 (LSTM)| (None, 256) | 265216    
+dropout_80 (Dropout)| (None, 256) | 0         
+dense_57 (Dense)|  (None, 1) | 257       
+activation_56 (Activation)| (None, 1) | 0         
+
+Total params: 265,473, trainable params: 265,473
+
 ### Justification
+
+|Algorithm|Setup|Error in prediction \*|
+|--------|----------|---|
+| **LSTM** | **one layer** | **Base model**
+| Random Walk | +/- 20% per day | +403%
+| Linear Regression | Continous split | +1350%
+| Linear Regression | Random split | +11%
+| Moving averages | Long window = 100 days | +493%
+| Moving averages | Short window = 20 days | +163%
+
+\* - Error in prediction in comparison to the base model (LSTM) is calculated in the following way:  
+
+`abs(base-model) / base * 100%`
+
+Trading randomly (flipping the coin) gives 403% worse results than using LSTM model. Using moving averages method generated 163% poorer results. Finally, the linear regression which cannot be used for any trading strategy gives 11% poorer portfolio than LSTM model.
 
 ## Conclusion
 
 ### Free-Form Visualization
 
+As the model on test set showed, using the LSTM model for 255 days gives an error of only $633.30 which is relatively small values. 
+
+<p><img src="/2CE2A4A3-9D9D-4387-8136-DCFFC193B109.png" width=700; height=400></p>
+
+The chart shows that the algorithm adjusts values whenever price changes the trend from short to long and from long to short position.
+
 ### Reflection
 
+The process for predicting bitcoin prices can be summarized using the following steps:
+
+1. Download the data, normalize them
+2. Train the model until the error RMSE is relatively small (use other benchmark to help determining what does it mean small)
+3. Use the model on real life data, update the original data set every day.
+4. If the model predicts the price going up, it's a good opportunity to buy. If it predicts the trend going down, it is probably good opportunity to sell.
+
+The most challenging part is that even if the algorithm on the charts look good - it predicts effectively, the additional fees for buying / selling can impact our final performance. Also, some of the price movement are determined by factors like: Government actions, social media news. The model does not use such events. It is very unlikely that such a simple model which ignores so many factors, and only learn from the historical prices can be a method used by professional Hedge fund companies, or . 
+
 ### Improvemnet
+
+During this training the data has been simplified to use only Closing day prices. The inputt data is a continous time series data maybe LSTM could predict better price with larger data once the time series are not collapsed to per-day prices. 
+
+Additional layer of LSTM could improve the results, but it would impact the final run time. 
+
+Additional features like Open prices, Average prices could be taken into considerations.
+
+Another approach for improving the results would be combination of LSTM and sentiment analysis - to interpret social media noise in order to predict Bitcoin prices.
 
 ## Resources
 
